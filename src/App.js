@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from "./public/assets/logo/logo.svg";
+import "./App.scss";
+import Container from "./components/Container";
+import Footer from "./components/Footer";
+import PlayWindow from "./components/PlayWindow";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <img className="logo" src={`/assets/logo/logo@1x.png`} srcSet={`/assets/logo/logo@2x.png 2x, /assets/logo/logo@3x.png 3x`} alt={"playline logo"} />
+        <PlayWindow />
+        <Footer />
+      </Container>
     </div>
   );
 }
