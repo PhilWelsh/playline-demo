@@ -9,8 +9,9 @@ const errorEndPoint =
 "https://wrongURL.json" //for testing
 
 const PlayWindow = () => {
-  const [playerRoster, setPlayerRoster] = useState({players:[]});
+  const [playerRoster, setPlayerRoster] = useState({players:[]})
   const [loadingValue, setLoadingValue] = useState()
+  const [returnTime, setReturnTime] = useState("7.30")
   const proxyurl = "https://cors-anywhere.herokuapp.com/";  //to deal with CORS issue
   
   async function getPlayerData(){
@@ -18,7 +19,7 @@ const PlayWindow = () => {
     axios
       .get((proxyurl + dataEndPoint), {headers: {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "X-Requested-With",'Access-Control-Allow-Credentials':true}})
       .then(res => {
-        setPlayerRoster({players: res.data.players}); 
+        setPlayerRoster({players: res.data.players})
         setLoadingValue("loaded")
       })
       .catch(err =>{
@@ -29,7 +30,7 @@ const PlayWindow = () => {
 
   const renderPlayerRoster = playerRoster.players.map((player, i) => {return(
     <div key={i} className="player to-upper">
-      <img alt="face" src={`/assets/headshots/${player.last_name}.png`}/>
+      <img alt={`${player.last_name} face`} src={`/assets/headshots/${player.last_name}.png`}/>
       <div><span>{player.last_name}</span></div>
       <div className="points-bubble morganfont"><span>{player.points}</span></div>
       <span>PTS</span>
@@ -45,7 +46,7 @@ const PlayWindow = () => {
       <LoadingBar loadingValue={loadingValue}/>
       <div id="response-message" className="morganfont">
         <h2>Your Playline is set!</h2>
-        <h3>Come back @ 7:30 to track it live!</h3>
+        <h3>Come back @ {returnTime} to track it live!</h3>
         <hr/>
       </div>
       <p id="hint">ProTip: You can manage your PlayLine's until they go live in the <a href="/upcoming" >Upcoming area</a></p>
